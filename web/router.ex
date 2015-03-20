@@ -16,6 +16,8 @@ defmodule Artprize.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/vote", VoteController, :index
+    post "/vote", VoteController, :create
   end
 
   # Other scopes may use custom stacks.

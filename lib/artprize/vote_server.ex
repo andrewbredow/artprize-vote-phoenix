@@ -10,7 +10,6 @@ defmodule Artprize.VoteServer do
     {status, message, votes} = result
     {:reply, {status, message}, votes}
   end
-
   def handle_call(:winner, _sender, votes) do
     result = calculate_winner(votes)
     message = case result do

@@ -9,8 +9,8 @@ defmodule Artprize.VoteController do
     json conn, %{status: "success", message: message}
   end
 
-  def create(conn, _params) do
-    result = GenServer.call(:vote_server, {:vote, {4, 5, {-85.6, 43}}})
+  def create(conn, params) do
+    result = GenServer.call(:vote_server, {:vote, vote_params(params)})
     response = case result do
       {:err, message} ->
         %{status: "error", message: message}
@@ -19,5 +19,18 @@ defmodule Artprize.VoteController do
     end
 
     json conn, response
+  end
+
+  defp vote_params(params) do
+    to_i = &String.to_integer/1
+    to_f = &String.to_float/1
+    {
+      to_i.(params["user_id"]),
+      to_i.(params["entry_id"]),
+      {
+        to_f.(params["location"]["lat"]),
+        to_f.(params["location"]["lng"])
+      }
+    }
   end
 end

@@ -1,4 +1,4 @@
-# Artprize Voting App
+# Artprize Voting App (Phoenix Framework/GenServer version)
 
 ## Demo for GRDevDay 2015
 
